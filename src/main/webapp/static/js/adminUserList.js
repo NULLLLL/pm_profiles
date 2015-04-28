@@ -33,7 +33,7 @@ adminUserList.initDataTable = function() {
 		method : 'get',
 		url : ctx + '/admin/userTable',
 		cache : false,
-		height : 800,
+		height : 550,
 		queryParams : function(params) {
 			return {
 				params : sysutil.findFormData('#searchDiv :input')
@@ -54,7 +54,7 @@ adminUserList.initDataTable = function() {
 		            {field : 'name',title : '姓名',sortable : true,formatter : adminUserList.nameFormatter}, 
 		            {field : 'loginName',title : '登录名',sortable : true}, 
 		            {field : 'registerDate',title : '注册时间',sortable : true}, 
-		            {field : 'role',title : 'role',sortable : true}, 
+		            {field : 'role',title : '权限',sortable : true}, 
 		            {field : 'id',title : '操作',formatter : adminUserList.operationFormatter} 
 		            		]
 	});

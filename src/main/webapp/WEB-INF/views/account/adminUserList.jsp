@@ -2,19 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-
 <html>
 <head>
 	<title>用户管理</title>
-	
 </head>
 <body>
-	<!-- <div id="warning">
-		<div id="messageDiv" class="alert alert-success" style="display: none;">
-			<button data-dismiss="alert" class="close">×</button>
-			<span id="messagespan"></span>
-		</div>
-	</div> -->
 	<div class="panel-body">
       	<div id="searchDiv" class="row" style="margin-top:10px;margin-bottom:10px;">
 				<div class="input-group col-xs-2">
@@ -37,12 +29,6 @@
 			<div class="col-xs-2">
 					<button type="button" class="btn btn-primary btn-sm" id="registerUser" >新建用户</button>
 			</div>	
-			<div class="col-xs-2">
-					<button type="button" class="btn btn-primary btn-sm" id="export" >export</button>
-			</div>
-			<div class="col-xs-2">
-					<button type="button" class="btn btn-primary btn-sm" id="testAsync" >test</button>
-			</div>
 		</div>
   </div>
   	<div id="userInfo" class="modal fade" tabindex="-1">
