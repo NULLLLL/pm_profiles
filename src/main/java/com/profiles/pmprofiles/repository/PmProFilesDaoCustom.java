@@ -11,4 +11,6 @@ public interface PmProFilesDaoCustom {
 
 	List<Map<String, Object>> getByP_Number(String p_number);
 
+	List<Map<String, Object>> getListForTable(String params);
+
 }

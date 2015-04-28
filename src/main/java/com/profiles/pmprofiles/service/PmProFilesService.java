@@ -18,4 +18,6 @@ public interface PmProFilesService {
 	List<Map<String, String>> get_distinct_p_numberAndName();
 
 	List<Map<String, Object>> getByP_Number(String p_number);
+
+	List<Map<String, Object>> getListForTable(String params);
 }

@@ -9,7 +9,6 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springside.modules.utils.Encodes;
 
 import util.DateUtil;
 
@@ -26,7 +25,7 @@ public class LoginRecordFilter extends FormAuthenticationFilter {
 	@Override
 	protected MYUsernamePasswordToken createToken(ServletRequest request, ServletResponse response) {
 		String username = getUsername(request);
-		String password = new String(Encodes.decodeBase64(getPassword(request)));
+		String password = getPassword(request);
 		boolean rememberMe = isRememberMe(request);
 		String host = getHost(request);
 		MYUsernamePasswordToken token = new MYUsernamePasswordToken(username, password != null ? password.toCharArray() : null, rememberMe, host);

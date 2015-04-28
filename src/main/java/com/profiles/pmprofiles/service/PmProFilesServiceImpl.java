@@ -107,4 +107,9 @@ public class PmProFilesServiceImpl implements PmProFilesService {
 			return null;
 		return pmProFilesDao.getByP_Number(p_number);
 	}
+
+	@Override
+	public List<Map<String, Object>> getListForTable(String params) {
+		return pmProFilesDao.getListForTable(params);
+	}
 }

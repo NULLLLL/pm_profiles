@@ -77,6 +77,7 @@ public class PmProFilesServiceTest extends BaseTest {
 
 	public static final String[] names = { "WEIGHT_PER", "UNCERTAINT", "SYMBOL" };
 
+	@Ignore
 	@SuppressWarnings("resource")
 	@Test
 	public void daochuExcel() {

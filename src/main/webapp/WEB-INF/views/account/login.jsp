@@ -59,8 +59,7 @@
 		<div class="form-group">
 			<div class="input-group">
 				<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-				<input type="password" id="password" placeholder="密码" class="form-control floating-label  required"/>
-				<input type="hidden" name="password" id="pwd"/>
+				<input type="password" id="password" name="password" placeholder="密码" class="form-control floating-label  required"/>
 			</div>
 		</div>
 		
@@ -70,7 +69,6 @@
 		
 	</form>
 </div>
-	<script src="${ctx}/static/tool/base64.js"></script>
 	<script src="${ctx}/static/js/login.js"></script>
 	<script>
 	$(document).ready(function() {

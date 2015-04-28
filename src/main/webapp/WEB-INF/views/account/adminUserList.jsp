@@ -91,7 +91,6 @@
 	</table>
 <script type='text/javascript' src='${ctx}/dwr/common/engine.js'></script>
 <script type='text/javascript' src='${ctx}/dwr/common/util.js'></script>
-<script type='text/javascript' src='${ctx}/dwr/common/interface/userAjax.js'></script>
 <script type="text/javascript" src="${ctx}/static/js/adminUserList.js?2015.01.07"></script>
 <script type="text/javascript">
 $(document).ready(function() {

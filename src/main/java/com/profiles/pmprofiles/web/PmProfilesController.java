@@ -3,36 +3,54 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.profiles.user.web;
+package com.profiles.pmprofiles.web;
+
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.profiles.user.service.AccountService;
+import util.LogUtil;
+
+import com.profiles.pmprofiles.service.PmProFilesService;
 
 @Controller
-@RequestMapping(value = "/admin")
-public class UserAdminController {
+@RequestMapping(value = "")
+public class PmProfilesController {
+
+	private static final Logger logger = LoggerFactory.getLogger(PmProfilesController.class);
 
 	@Autowired
-	private AccountService accountService;
+	private PmProFilesService pmProFilesService;
 
-	@RequestMapping(value = "/user")
+	@RequestMapping(value = "/list")
 	public String list() {
-		return "account/adminUserList";
+		return "profiles/profiles";
 	}
 
-	@RequestMapping(value = "/userTable")
+	@RequestMapping(value = "/listTable")
 	@ResponseBody
-	public JSONArray getUserTable(@RequestParam(value = "_", required = false) String _, @RequestParam(value = "params") String params) {
-		return null;
+	public JSONArray getListTable(@RequestParam(value = "_", required = false) String _, @RequestParam(value = "params") String params) {
+		List<Map<String, Object>> list = null;
+		try {
+			list = pmProFilesService.getListForTable(params);
+			JSONArray jsonArray = JSONArray.fromObject(list);
+			return jsonArray;
+		} catch (Exception e) {
+			logger.error(LogUtil.stackTraceToString(e));
+			return null;
+		}
+
 	}
 
 	@RequestMapping(value = "/export")
