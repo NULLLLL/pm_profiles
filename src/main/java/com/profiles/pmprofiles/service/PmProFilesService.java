@@ -14,4 +14,8 @@ public interface PmProFilesService {
 	void saveExcel(String filePath);
 
 	List<Map<String, String>> get_distinct_p_numberAndDocument();
+
+	List<Map<String, String>> get_distinct_p_numberAndName();
+
+	List<Map<String, Object>> getByP_Number(String p_number);
 }

@@ -56,6 +56,8 @@ public class PmProFilesServiceImpl implements PmProFilesService {
 	@Override
 	@Transactional(readOnly = false)
 	public void saveExcel(String filePath) {
+		if (StringHelper.isEmpty(filePath))
+			return;
 		File file = new File(filePath);
 		Workbook workbook = null;
 		List<String> list = null;
@@ -92,5 +94,17 @@ public class PmProFilesServiceImpl implements PmProFilesService {
 	@Override
 	public List<Map<String, String>> get_distinct_p_numberAndDocument() {
 		return pmProFilesDao.get_distinct_p_numberAndDocument();
+	}
+
+	@Override
+	public List<Map<String, String>> get_distinct_p_numberAndName() {
+		return pmProFilesDao.get_distinct_p_numberAndName();
+	}
+
+	@Override
+	public List<Map<String, Object>> getByP_Number(String p_number) {
+		if (StringHelper.isEmpty(p_number))
+			return null;
+		return pmProFilesDao.getByP_Number(p_number);
 	}
 }
