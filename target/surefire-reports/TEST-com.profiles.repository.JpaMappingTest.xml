@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.profiles.repository.JpaMappingTest" time="0.026" tests="2" errors="0" skipped="1" failures="0">
+<testsuite name="com.profiles.repository.JpaMappingTest" time="0.043" tests="2" errors="0" skipped="1" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/opt/jdk1.7.0_71/jre/lib/amd64"/>
@@ -23,7 +23,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/chinark/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf8107860767134041011.tmp"/>
+    <property name="classworlds.conf" value="/home/chinark/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf8759387219311511954.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -62,5 +62,5 @@
   <testcase name="allClassMapping" classname="com.profiles.repository.JpaMappingTest" time="0">
     <skipped/>
   </testcase>
-  <testcase name="initContext" classname="com.profiles.repository.JpaMappingTest" time="0.026"/>
+  <testcase name="initContext" classname="com.profiles.repository.JpaMappingTest" time="0.043"/>
 </testsuite>

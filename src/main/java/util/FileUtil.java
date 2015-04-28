@@ -7,11 +7,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -169,5 +174,32 @@ public class FileUtil {
 		}
 		logger.info(" file delete as : " + path);
 		return flag;
+	}
+
+	public static String getCellFormatValue(Cell cell) {
+		String cellvalue = "";
+		if (cell != null) {
+			switch (cell.getCellType()) {
+			case XSSFCell.CELL_TYPE_NUMERIC:
+			case XSSFCell.CELL_TYPE_FORMULA:
+				if (HSSFDateUtil.isCellDateFormatted(cell)) {
+					Date date = cell.getDateCellValue();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					cellvalue = sdf.format(date);
+				} else {
+					cellvalue = String.valueOf(cell.getNumericCellValue());
+					if (cellvalue.endsWith(".0"))
+						cellvalue = cellvalue.replace(".0", "");
+				}
+				break;
+			case XSSFCell.CELL_TYPE_STRING:
+				cellvalue = cell.getRichStringCellValue().getString();
+				break;
+			default:
+				cellvalue = "";
+			}
+		} else
+			cellvalue = "";
+		return cellvalue;
 	}
 }

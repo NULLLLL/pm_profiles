@@ -7,47 +7,78 @@
 
 <html>
 <head>
+	<link href="${ctx}/static/jquery-validation/1.11.1/validate.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/static/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/static/tool/bootstrap-material/css/ripples.min.css" rel="stylesheet">
+	<link href="${ctx}/static/tool/bootstrap-material/css/material-wfont.css" rel="stylesheet">
+	<script src="${ctx}/static/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery-validation/1.11.1/messages_bs_zh.js" type="text/javascript"></script>
+	<script src="${ctx}/static/bootstrap/3.0.0/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="${ctx}/static/tool/bootstrap-material/js/ripples.min.js"></script>
+	<script src="${ctx}/static/tool/bootstrap-material/js/material.js"></script>
+	
 	<title>登录页</title>
+	
+	<style type="text/css">
+	body {
+		width:100%;
+		height:100%;
+		background-image:url(${ctx}/static/images/background.jpg);
+		background-repeat: no-repeat;
+		background-size : 100% 100%;
+	}
+	form {
+		opacity: 0.9;
+	}
+	</style>
 </head>
 
 <body>
+<div style="position: absolute;top:20%;left:40%;width:15%">
 	<form id="loginForm" action="${ctx}/login" method="post" class="form-horizontal">
-	<%
-	String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-	if(error != null){
-	%>
-		<div class="alert alert-error input-medium controls">
-			<button class="close" data-dismiss="alert">×</button>登录失败，请重试.
+		<%
+			if(request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME) != null) {
+				String error = request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME).toString();
+			if(error != null){
+				System.out.print(error);
+		%>
+					<div class="alert alert-error input-medium ">
+						<button class="close" data-dismiss="alert">×</button>登录失败，请重试.
+					</div>
+		<%
+				}
+			}
+		%>
+		<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+					<input type="text" id="username" name="username" placeholder="用户名" class="form-control floating-label required"/>
+				</div>
 		</div>
-	<%
-	}
-	%>
-		<div class="control-group">
-			<label for="username" class="control-label">名称:</label>
-			<div class="controls">
-				<input type="text" id="username" name="username"  value="${username}" class="input-medium required"/>
+		<div class="form-group">
+			<div class="input-group">
+				<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+				<input type="password" id="password" placeholder="密码" class="form-control floating-label  required"/>
+				<input type="hidden" name="password" id="pwd"/>
 			</div>
 		</div>
-		<div class="control-group">
-			<label for="password" class="control-label">密码:</label>
-			<div class="controls">
-				<input type="password" id="password" name="password" class="input-medium required"/>
-			</div>
+		
+		<div class="control-group" style="text-align: center;">
+				<input id="submit_btn" class="btn btn-primary" type="button" onclick="login.formSub()" value="登录"/> 
 		</div>
-				
-		<div class="control-group">
-			<div class="controls">
-				<label class="checkbox" for="rememberMe"><input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我</label>
-				<input id="submit_btn" class="btn btn-primary" type="submit" value="登录"/> <a class="btn" href="${ctx}/register">注册</a>
-			 	<span class="help-block">(管理员: <b>admin/admin</b>, 普通用户: <b>user/user</b>)</span>
-			</div>
-		</div>
+		
 	</form>
-
+</div>
+	<script src="${ctx}/static/tool/base64.js"></script>
+	<script src="${ctx}/static/js/login.js"></script>
 	<script>
-		$(document).ready(function() {
-			$("#loginForm").validate();
-		});
+	$(document).ready(function() {
+			$.material.init();
+ 	});
+	$(document).ready(function() {
+		$("#loginForm").validate();
+	});
 	</script>
 </body>
 </html>

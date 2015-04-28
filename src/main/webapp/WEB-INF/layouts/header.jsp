@@ -3,26 +3,32 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <div id="header">
-	<div id="title">
-	    <h1><a href="${ctx}">QuickStart示例</a><small>--TodoList应用演示</small>
-	    <shiro:user>
-			<div class="btn-group pull-right">
-				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-user"></i> <shiro:principal property="name"/>
-					<span class="caret"></span>
-				</a>
-			
-				<ul class="dropdown-menu">
-					<shiro:hasRole name="admin">
-						<li><a href="${ctx}/admin/user">Admin Users</a></li>
-						<li class="divider"></li>
-					</shiro:hasRole>
-					<li><a href="${ctx}/api">APIs</a></li>
-					<li><a href="${ctx}/profile">Edit Profile</a></li>
-					<li><a href="${ctx}/logout">Logout</a></li>
-				</ul>
-			</div>
-		</shiro:user>
-		</h1>
-	</div>
+<div class="navbar navbar-default">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="javascript:void(0)">Brand</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="javascript:void(0)">Active</a></li>
+      <li><a href="javascript:void(0)">Link</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="javascript:void(0)">Link</a></li>
+      <li class="dropdown">
+      		<shiro:user>
+					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Hello，<shiro:principal property="name"/><b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="${ctx}/profile">修改密码</a></li>
+						<li><a href="${ctx}/logout">注销</a></li>
+					</ul>
+        </shiro:user>
+      </li>
+    </ul>
+  </div>
+</div>
 </div>

@@ -20,20 +20,18 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.modules.utils.Encodes;
 
 import com.google.common.base.Objects;
-import com.profiles.entity.User;
+import com.profiles.user.entity.User;
+import com.profiles.user.service.AccountService;
+import com.profiles.user.service.AccountServiceImpl;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
+	@Autowired
 	protected AccountService accountService;
-
-	protected ShiroManager shiroManager;
-
-	public void setShiroManager(ShiroManager shiroManager) {
-		this.shiroManager = shiroManager;
-	}
 
 	/**
 	 * 认证回调函数,登录时调用.
@@ -59,7 +57,6 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
 		User user = accountService.findUserByLoginName(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(user.getRoleList());
 		return info;
 	}
 
@@ -68,14 +65,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	 */
 	@PostConstruct
 	public void initCredentialsMatcher() {
-		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(AccountService.HASH_ALGORITHM);
-		matcher.setHashIterations(AccountService.HASH_INTERATIONS);
-
+		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(AccountServiceImpl.HASH_ALGORITHM);
+		matcher.setHashIterations(AccountServiceImpl.HASH_INTERATIONS);
 		setCredentialsMatcher(matcher);
-	}
-
-	public void setAccountService(AccountService accountService) {
-		this.accountService = accountService;
 	}
 
 	/**
@@ -90,6 +82,26 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		public ShiroUser(Long id, String loginName, String name) {
 			this.id = id;
 			this.loginName = loginName;
+			this.name = name;
+		}
+
+		public Long getId() {
+			return id;
+		}
+
+		public void setId(Long id) {
+			this.id = id;
+		}
+
+		public String getLoginName() {
+			return loginName;
+		}
+
+		public void setLoginName(String loginName) {
+			this.loginName = loginName;
+		}
+
+		public void setName(String name) {
 			this.name = name;
 		}
 
@@ -137,5 +149,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 			}
 			return true;
 		}
+
 	}
+
 }

@@ -20,8 +20,6 @@
 	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
 	<bean id="shiroDbRealm" class="com.profiles.service.account.ShiroDbRealm" depends-on="userDao">
 	
-	<property name="accountService" ref="accountService"/>
-	<property name="shiroManager" ref="shiroManager"/>
 	</bean>
 	
 	<!-- Shiro Filter -->

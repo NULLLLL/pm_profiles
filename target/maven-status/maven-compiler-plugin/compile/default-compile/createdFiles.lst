@@ -1,16 +1,9 @@
-com/profiles/service/account/ShiroDbRealm.class
-com/profiles/web/account/UserAdminController.class
 util/Upload.class
 util/DateUtil.class
 util/LogUtil.class
-com/profiles/service/account/ShiroManager.class
-com/profiles/service/account/ShiroDbRealm$ShiroUser.class
 util/TimestampJsonSerializer.class
 com/profiles/service/ServiceException.class
-com/profiles/repository/UserDao.class
-com/profiles/web/account/LoginController.class
 util/StringHelper.class
-com/profiles/web/account/LoginRecordFilter.class
 util/FileEncryptAndDecryptUtil.class
 util/ExpressUtil.class
 com/profiles/rest/RestException.class
@@ -19,10 +12,5 @@ util/NumberFormatterUtil.class
 util/ObjectFieldUtil.class
 util/EntryptPasswd.class
 util/FileUtil.class
-com/profiles/web/account/ProfileController.class
-com/profiles/service/account/AccountService.class
 com/profiles/service/account/MYUsernamePasswordToken.class
-com/profiles/web/account/RegisterController.class
 util/ProfilesUtil.class
-com/profiles/entity/IdEntity.class
-com/profiles/entity/User.class
