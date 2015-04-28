@@ -14,8 +14,10 @@
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="javascript:void(0)">Active</a></li>
-      <li><a href="javascript:void(0)">Link</a></li>
+    		<shiro:hasPermission name="amdin:usermanager">
+      		<li id="li_amdin_user"><a href="${ctx}/admin/user">用户管理</a></li>
+    		</shiro:hasPermission>
+      <li class="active" id="li_list" ><a href="${ctx}/list">列表</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="javascript:void(0)">Link</a></li>

@@ -6,7 +6,8 @@ var profilesList = function() {
 };
 
 $(function() {
-	
+	$('#li_list').attr('class','active');
+	$('#li_amdin_user').removeAttr('class');
 	profilesList.initDataTable();
 	$('#searchProfilesData').click(function() {
 		profilesList.searchTable();

@@ -6,6 +6,8 @@
 package com.profiles.service.account;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -24,6 +26,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.modules.utils.Encodes;
 
 import com.google.common.base.Objects;
+import com.profiles.base.Action;
+import com.profiles.base.Role;
 import com.profiles.user.entity.User;
 import com.profiles.user.service.AccountService;
 import com.profiles.user.service.AccountServiceImpl;
@@ -57,8 +61,18 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
 		User user = accountService.findUserByLoginName(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		String role = user.getRoles();
-		info.addRole(role);
+		Role role = null;
+		if (user != null) {
+			role = user.getRole();
+			info.addRole(role.getName());
+			shiroUser.setRoleId(role.getId());
+			Set<String> permisStr = new HashSet<String>();
+			Set<Action> actions = role.getActions();
+			for (Action ac : actions) {
+				permisStr.add(ac.getName());
+			}
+			info.setStringPermissions(permisStr);
+		}
 		return info;
 	}
 
@@ -80,6 +94,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		public Long id;
 		public String loginName;
 		public String name;
+		public long roleId;
 
 		public ShiroUser(Long id, String loginName, String name) {
 			this.id = id;
@@ -93,6 +108,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
 		public void setId(Long id) {
 			this.id = id;
+		}
+
+		public long getRoleId() {
+			return roleId;
+		}
+
+		public void setRoleId(long roleId) {
+			this.roleId = roleId;
 		}
 
 		public String getLoginName() {

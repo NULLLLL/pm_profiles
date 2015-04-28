@@ -9,6 +9,12 @@
 	
 </head>
 <body>
+	<!-- <div id="warning">
+		<div id="messageDiv" class="alert alert-success" style="display: none;">
+			<button data-dismiss="alert" class="close">×</button>
+			<span id="messagespan"></span>
+		</div>
+	</div> -->
 	<div class="panel-body">
       	<div id="searchDiv" class="row" style="margin-top:10px;margin-bottom:10px;">
 				<div class="input-group col-xs-2">
@@ -91,6 +97,7 @@
 	</table>
 <script type='text/javascript' src='${ctx}/dwr/common/engine.js'></script>
 <script type='text/javascript' src='${ctx}/dwr/common/util.js'></script>
+<script type='text/javascript' src='${ctx}/dwr/common/interface/userAjax.js'></script>
 <script type="text/javascript" src="${ctx}/static/js/adminUserList.js?2015.01.07"></script>
 <script type="text/javascript">
 $(document).ready(function() {

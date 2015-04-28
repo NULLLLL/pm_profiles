@@ -4,10 +4,10 @@
 <dwr>
 	<allow>
 
-		<!-- <convert converter="bean" match="dota.csv.service.UploadAjax" />
-		<create javascript="UploadAjax" creator="spring">
-			<param name="beanName">uploadAjax</param>
-		</create> -->
+		<convert converter="bean" match="com.usermanager.user.ajax.UserAjax" />
+		<create javascript="userAjax" creator="spring">
+			<param name="beanName">userAjax</param>
+		</create>
 
 	</allow>
 </dwr>
