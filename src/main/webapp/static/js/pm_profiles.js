@@ -20,12 +20,16 @@ $(function() {
 	});
 });
 
+profilesList.idformatter = function(data, record) {
+	return '<input type="checkbox" value="' + record.id + '"/>';
+};
+
 profilesList.initDataTable = function() {
 	$('#ProfilestableId').bootstrapTable({
 		method : 'get',
 		url : ctx + '/listTable',
 		cache : false,
-		height : 550,
+		height : 600,
 		queryParams : function(params) {
 			return {
 				params : sysutil.findFormData('#searchDiv :input')
@@ -42,7 +46,7 @@ profilesList.initDataTable = function() {
 		minimumCountColumns : 2,
 		smartDisplay : true,
 		clickToSelect : false,
-		columns : [ {field : 'id',checkbox : true}, 
+		columns : [ /*{field : 'id', formatter:profilesList.idformatter},*/ 
 		            {field : 'p_number',title : 'p_number',sortable : true}, 
 		            {field : 'name',title : 'name',sortable : true}, 
 		            {field : 'lower_size',title : 'lower_size',sortable : true}, 
@@ -57,10 +61,6 @@ profilesList.initDataTable = function() {
 
 profilesList.searchTable = function() {
 	$('#ProfilestableId').bootstrapTable('refresh');
-};
-
-profilesList.idformatter = function(data, record) {
-	return '<input type="checkbox" value="' + record.id + '"/>';
 };
 
 var warning = '<div id="messageDiv" class="alert alert-success" style="display: none;">'

@@ -50,7 +50,7 @@ adminUserList.initDataTable = function() {
 		minimumCountColumns : 2,
 		smartDisplay : true,
 		clickToSelect : false,
-		columns : [ {field : 'id',checkbox : true}, 
+		columns : [ {field : 'id',checkbox : true,formatter : adminUserList.idformatter}, 
 		            {field : 'name',title : '姓名',sortable : true,formatter : adminUserList.nameFormatter}, 
 		            {field : 'loginName',title : '登录名',sortable : true}, 
 		            {field : 'registerDate',title : '注册时间',sortable : true}, 
@@ -72,7 +72,7 @@ adminUserList.searchTable = function() {
 };
 
 adminUserList.idformatter = function(data, record) {
-	return '<input type="checkbox" value="' + record.id + '"/>';
+	return '<input type="checkbox" value="' + record.id + '"/>'
 };
 
 adminUserList.operationFormatter = function(value, row, index) {

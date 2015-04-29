@@ -17,14 +17,26 @@
 				<div class="input-group col-xs-2">
 					  <input type="text" id="name" placeholder="name" name="name" class="form-control floating-label col-xs-2"/>
 				</div>
+				<div class="input-group col-xs-1" style="margin-top:5px;">
+					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">lower_size<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><input type="checkbox" />修改密码</li>
+						<li><input type="checkbox" />注销</li>
+					</ul>
+				</div>
+				<div class="input-group col-xs-1" style="margin-top:5px;">
+					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">upper_size<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><input type="checkbox" />修改密码</li>
+						<li><input type="checkbox" />注销</li>
+					</ul>
+				</div>
 				<div class="col-xs-2">
 					<button type="submit" class="btn btn-primary btn-sm" id="searchProfilesData" >搜索</button>
-				</div>		
+				</div>	
+				
 		</div>
 		<!-- <div>
-			<div class="col-xs-2">
-					<button type="button" class="btn btn-primary btn-sm" id="registerUser" >新建用户</button>
-			</div>	
 			<div class="col-xs-2">
 					<button type="button" class="btn btn-primary btn-sm" id="export" >export</button>
 			</div>
