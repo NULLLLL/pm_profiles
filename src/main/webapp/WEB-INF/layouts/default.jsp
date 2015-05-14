@@ -20,6 +20,7 @@
 <link href="${ctx}/static/tool/bootstrap-material/css/material-wfont.css" rel="stylesheet">
 <link href="${ctx}/static/tool/messenger/css/messenger.css" rel="stylesheet">
 <link href="${ctx}/static/tool/messenger/css/messenger-theme-future.css" rel="stylesheet">
+<link href="${ctx}/static/tool/bootstrap-material/css/jquery.dropdown.css" rel="stylesheet">
 <script src="${ctx}/static/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/bootstrap/3.0.0/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
@@ -30,6 +31,8 @@
 <script src="${ctx}/static/tool/bootstrap-material/js/ripples.min.js"></script>
 <script src="${ctx}/static/tool/bootstrap-material/js/material.js"></script>
 <script src="${ctx}/static/tool/messenger/js/messenger.min.js"></script>
+<script src="${ctx}/static/tool/bootstrap-material/js/jquery.dropdown.js"></script>
+
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/constructor.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/constructor/BaseClass.js" ></script>
 <script type="text/javascript" src="${ctx}/static/tool/oop/class/Sysutil.js" ></script>
@@ -37,6 +40,7 @@
 <script type="text/javascript">
 	var sysutil = New(Sysutil,[]);
 	var context = '${ctx}';
+	var ctx = context;
 	var $ = jQuery.noConflict();
   $._messengerDefaults = {
 		  extraClasses: 'messenger-fixed messenger-theme-future messenger-on-top'

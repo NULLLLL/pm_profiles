@@ -20,20 +20,25 @@
 				<div class="input-group col-xs-1" style="margin-top:5px;">
 					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">lower_size<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><input type="checkbox" />修改密码</li>
-						<li><input type="checkbox" />注销</li>
+						<li><input type="checkbox" /></li>
+						<li><input type="checkbox" /></li>
 					</ul>
 				</div>
 				<div class="input-group col-xs-1" style="margin-top:5px;">
 					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">upper_size<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><input type="checkbox" />修改密码</li>
-						<li><input type="checkbox" />注销</li>
+						<li><input type="checkbox" /></li>
+						<li><input type="checkbox" /></li>
 					</ul>
 				</div>
+
 				<div class="col-xs-2">
 					<button type="submit" class="btn btn-primary btn-sm" id="searchProfilesData" >搜索</button>
 				</div>	
+				<div>
+					<input type="submit" value="Start" onclick="start()" />
+				</div>
+				<div id="messages"></div>
 				
 		</div>
 		<!-- <div>
@@ -48,6 +53,40 @@
 <script type='text/javascript' src='${ctx}/dwr/common/util.js'></script>
 <script type="text/javascript" src="${ctx}/static/js/pm_profiles.js?2015.01.07"></script>
 <script type="text/javascript">
+var webSocket = 
+	new WebSocket('ws://localhost:8080'+ctx+'/websocket');
+
+webSocket.onerror = function(event) {
+	onError(event)
+};
+
+webSocket.onopen = function(event) {
+	onOpen(event)
+};
+
+webSocket.onmessage = function(event) {
+	onMessage(event)
+};
+
+function onMessage(event) {
+	document.getElementById('messages').innerHTML 
+		+= '<br />' + event.data;
+}
+
+function onOpen(event) {
+	document.getElementById('messages').innerHTML 
+		= 'Connection established';
+}
+
+function onError(event) {
+	alert(event.data);
+}
+
+function start() {
+	webSocket.send('hello');
+	return false;
+}
+</script>
 $(document).ready(function() {
     $.material.init();
 	 });

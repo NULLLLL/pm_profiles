@@ -15,9 +15,9 @@
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
     		<shiro:hasPermission name="amdin:usermanager">
-      		<li id="li_amdin_user"><a href="${ctx}/admin/user">用户管理</a></li>
+      		<li id="li_amdin_user"><a href="${ctx}/admin/user" onclick="changeActive(this)">用户管理</a></li>
     		</shiro:hasPermission>
-      <li class="active" id="li_list" ><a href="${ctx}/list">列表</a></li>
+      <li class="active" id="li_list" ><a href="${ctx}/list" onclick="changeActive(this)">列表</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="javascript:void(0)">Link</a></li>
@@ -34,3 +34,9 @@
   </div>
 </div>
 </div>
+<script type="text/javascript">
+function changeActive(obj){
+	$(obj).attr('class','active');
+	$('.active').removeAttr('class');
+}
+</script>

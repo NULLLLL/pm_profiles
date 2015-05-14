@@ -38,6 +38,17 @@ public class PmProfilesController {
 		return "profiles/profiles";
 	}
 
+	/*@Autowired
+	private SimpMessagingTemplate template;
+
+	@MessageMapping("/userChat")
+	public void userChat(UserChatCommand userChat) {
+		//找到需要发送的地址
+		String dest = "/userChat/chat" + userChat.getCoordinationId();
+		//发送用户的聊天记录
+		this.template.convertAndSend(dest, userChat);
+	}*/
+
 	@RequestMapping(value = "/listTable")
 	@ResponseBody
 	public JSONArray getListTable(@RequestParam(value = "_", required = false) String _, @RequestParam(value = "params") String params) {
