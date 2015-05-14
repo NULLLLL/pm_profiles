@@ -42,7 +42,18 @@
 
 	<!-- 依赖项定义 -->
 	<dependencies>
-	    <dependency>
+		<!-- <dependency>  
+		   <groupId>org.springframework</groupId>  
+		   <artifactId>spring-websocket</artifactId>  
+		   <version>4.1.6.RELEASE</version>  
+		</dependency>  
+		<dependency>  
+		   <groupId>org.springframework</groupId>  
+		   <artifactId>spring-messaging</artifactId>  
+		   <version>4.1.6.RELEASE</version>  
+		</dependency> -->
+	
+    <dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-commons</artifactId>
 			<version>1.5.0.RELEASE</version>
@@ -504,6 +515,11 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml-schemas</artifactId>
 			<version>3.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.textmining</groupId>
+			<artifactId>tm-extractors</artifactId>
+			<version>0.4</version>
 		</dependency>
 	</dependencies>
 	
