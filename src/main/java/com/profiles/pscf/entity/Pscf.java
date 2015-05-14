@@ -10,8 +10,8 @@ import com.profiles.base.IdEntity;
 public class Pscf extends IdEntity {
 
 	private Integer hour;
-	private Double jingdu;
 	private Double weidu;
+	private Double jingdu;
 	private String q;
 	private String tc;
 	private String oc;

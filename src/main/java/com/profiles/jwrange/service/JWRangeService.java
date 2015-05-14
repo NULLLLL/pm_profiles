@@ -8,4 +8,6 @@ public interface JWRangeService {
 
 	void saveData(List<Object> data);
 
+	void selectDataInRange();
+
 }

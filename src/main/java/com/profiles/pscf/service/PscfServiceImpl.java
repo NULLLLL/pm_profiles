@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -106,6 +107,11 @@ public class PscfServiceImpl implements PscfService {
 			e.printStackTrace();
 			logger.error(LogUtil.stackTraceToString(e));
 		}
+	}
+
+	@Override
+	public List<Map<String, Object>> findByJingDuAndWeiDu(double jingdu, double weidu) {
+		return pscfDao.findByJingDuAndWeiDu(jingdu, weidu);
 	}
 
 }
