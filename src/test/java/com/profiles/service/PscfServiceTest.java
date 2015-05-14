@@ -1,24 +1,26 @@
 package com.profiles.service;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.profiles.base.BaseTest;
 import com.profiles.pscf.service.PscfService;
 
-@TransactionConfiguration(defaultRollback = false)
+//@TransactionConfiguration(defaultRollback = false)
 public class PscfServiceTest extends BaseTest {
 
 	@Autowired
 	private PscfService pscfService;
 
+	@Ignore
 	@Test
 	public void saveExcel() {
 		String filePath = "PSCF.xls";
 		pscfService.saveExcel(filePath);
 	}
 
+	@Ignore
 	@Test
 	public void saveData() {
 		pscfService.saveData(null);

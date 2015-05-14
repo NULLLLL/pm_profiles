@@ -20,9 +20,15 @@ public class JWRangeServiceTest extends BaseTest {
 		jWRangeService.saveExcel(filePath);
 	}
 
+	@Ignore
 	@Test
 	public void selectDataInRange() {
 		jWRangeService.selectDataInRange();
+	}
+
+	@Test
+	public void export() {
+		jWRangeService.export("PSCF1.xls");
 	}
 
 }

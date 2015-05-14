@@ -2,6 +2,8 @@ package com.profiles.jwrange.service;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -9,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -475,4 +480,53 @@ public class JWRangeServiceImpl implements JWRangeService {
 			logger.error(LogUtil.stackTraceToString(e));
 		}
 	}
+
+	@Override
+	public void export(String pathname) {
+		HSSFWorkbook workbook = null;
+		HSSFRow row = null;
+		int rowNum = 0;
+		try {
+			List<Map<String, Object>> data = jWRangeDao.findAllData();
+			if (CollectionUtils.isEmpty(data))
+				return;
+			workbook = new HSSFWorkbook();
+			HSSFSheet sheet = workbook.createSheet("格子2");
+			int cellNum = 0;
+			Class<?> clazz = JWRange.class;
+			Field[] fields = clazz.getDeclaredFields();
+			int flag = 0;
+			for (Map<String, Object> map : data) {
+				row = sheet.createRow(rowNum);
+				if (flag == 32) {
+					rowNum++;
+					flag = 0;
+					row = sheet.createRow(rowNum);
+				}
+				for (Field field : fields) {
+					String name = field.getName();
+					if (cellNum < 2)
+						row.createCell(cellNum).setCellValue(Double.parseDouble(String.valueOf(map.get(name))));
+					else
+						row.createCell(cellNum).setCellValue(Integer.parseInt(String.valueOf(map.get(name))));
+					cellNum++;
+				}
+				cellNum = 0;
+				rowNum++;
+				flag++;
+			}
+
+			FileOutputStream fout = new FileOutputStream(pathname);
+			workbook.write(fout);
+			fout.close();
+			File file = new File(pathname);
+			InputStream inputStream = new FileInputStream(file);
+			byte[] byteArray = FileUtil.toByteArray(inputStream);
+			FileUtil.writeFile(pathname, byteArray);
+		} catch (Exception e) {
+			logger.error(LogUtil.stackTraceToString(e));
+		}
+
+	}
+
 }

@@ -10,4 +10,6 @@ public interface JWRangeService {
 
 	void selectDataInRange();
 
+	void export(String pathname);
+
 }
