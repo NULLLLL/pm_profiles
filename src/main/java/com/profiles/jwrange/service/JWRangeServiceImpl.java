@@ -183,9 +183,9 @@ public class JWRangeServiceImpl implements JWRangeService {
 				oc_m = jwRange.getOc_m();
 				ec_m = jwRange.getEc_m();
 				na_m = jwRange.getNa_m();
-				nh4_m = jwRange.getQ_m();
-				cl_m = jwRange.getQ_m();
-				no3_m = jwRange.getQ_m();
+				nh4_m = jwRange.getNh4_m();
+				cl_m = jwRange.getCl_m();
+				no3_m = jwRange.getNo3_m();
 				so4_m = jwRange.getSo4_m();
 				al_m = jwRange.getAl_m();
 				si_m = jwRange.getSi_m();
