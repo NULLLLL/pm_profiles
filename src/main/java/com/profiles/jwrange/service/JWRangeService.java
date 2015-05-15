@@ -12,4 +12,6 @@ public interface JWRangeService {
 
 	void export(String pathname);
 
+	void setValueZero();
+
 }

@@ -3,11 +3,12 @@ package com.profiles.service;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.profiles.base.BaseTest;
 import com.profiles.jwrange.service.JWRangeService;
 
-//@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration(defaultRollback = false)
 public class JWRangeServiceTest extends BaseTest {
 
 	@Autowired
@@ -20,7 +21,7 @@ public class JWRangeServiceTest extends BaseTest {
 		jWRangeService.saveExcel(filePath);
 	}
 
-	@Ignore
+	//	@Ignore
 	@Test
 	public void selectDataInRange() {
 		jWRangeService.selectDataInRange();
@@ -29,6 +30,12 @@ public class JWRangeServiceTest extends BaseTest {
 	@Test
 	public void export() {
 		jWRangeService.export("PSCF1.xls");
+	}
+
+	@Test
+	public void initRange() {
+		jWRangeService.setValueZero();
+
 	}
 
 }
