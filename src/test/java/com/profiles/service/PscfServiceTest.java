@@ -20,10 +20,4 @@ public class PscfServiceTest extends BaseTest {
 		pscfService.saveExcel(filePath);
 	}
 
-	@Ignore
-	@Test
-	public void saveData() {
-		pscfService.saveData(null);
-	}
-
 }

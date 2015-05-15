@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,7 @@ public class JWRangeServiceImpl implements JWRangeService {
 			if (firstRow == null)
 				return;
 			short lastCellNum = firstRow.getLastCellNum();
+			delAll();//先清空数据库
 			for (int i = firstRowNum + 2; i <= lastRowNum; i++) {
 				list = new ArrayList<Object>();
 				Row row = sheet.getRow(i);
@@ -74,18 +76,18 @@ public class JWRangeServiceImpl implements JWRangeService {
 						break;
 					Cell cell = row.getCell(k);
 					String cellValue = FileUtil.getCellFormatValue(cell);
+					if (cellValue.equals("-"))
+						cellValue = "";
 					list.add(cellValue);
 				}
 				saveData(list);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error(LogUtil.stackTraceToString(e));
 		}
 
 	}
 
-	@Override
 	public void saveData(List<Object> data) {
 		JWRange range = new JWRange();
 		try {
@@ -126,315 +128,52 @@ public class JWRangeServiceImpl implements JWRangeService {
 		return (List<JWRange>) jWRangeDao.findAll();
 	}
 
+	public void delAll() {
+		jWRangeDao.deleteAll();
+	}
+
 	@Override
 	public void selectDataInRange() {
+		setValueZero();
 		List<JWRange> list = findAll();
-		Class<?> clazz = Pscf.class;
-		Field[] fields = clazz.getDeclaredFields();
+		Class<?> pscfClazz = Pscf.class;
+		Class<?> jwRangeClazz = JWRange.class;
+		Field[] pscfFields = pscfClazz.getDeclaredFields();
 		Double weidu = 0.00;
 		Double jingdu = 0.00;
-		String fieldName = null;
+		String pscfFieldName = null;
 		String value = null;
 		List<Map<String, Object>> data = null;
 		try {
 			for (JWRange jwRange : list) {
 				weidu = jwRange.getWeidu();
 				jingdu = jwRange.getJingdu();
-				Integer q_m = 0;
-				Integer tc_m = 0;
-				Integer oc_m = 0;
-				Integer ec_m = 0;
-				Integer na_m = 0;
-				Integer nh4_m = 0;
-				Integer cl_m = 0;
-				Integer no3_m = 0;
-				Integer so4_m = 0;
-				Integer al_m = 0;
-				Integer si_m = 0;
-				Integer ca_m = 0;
-				Integer v_m = 0;
-				Integer fe_m = 0;
-				Integer ni_m = 0;
-				Integer zn_m = 0;
-				Integer pb_m = 0;
-				Integer cd_m = 0;
-				Integer s_m = 0;
-				Integer q_q = 0;
-				Integer tc_q = 0;
-				Integer oc_q = 0;
-				Integer ec_q = 0;
-				Integer na_q = 0;
-				Integer nh4_q = 0;
-				Integer cl_q = 0;
-				Integer no3_q = 0;
-				Integer so4_q = 0;
-				Integer al_q = 0;
-				Integer si_q = 0;
-				Integer ca_q = 0;
-				Integer v_q = 0;
-				Integer fe_q = 0;
-				Integer ni_q = 0;
-				Integer zn_q = 0;
-				Integer pb_q = 0;
-				Integer cd_q = 0;
-				Integer s_q = 0;
 				data = pscfService.findByJingDuAndWeiDu(jingdu, weidu);
 				if (CollectionUtils.isEmpty(data))
 					continue;
 				for (Map<String, Object> map : data) {
-					for (Field field : fields) {
-						fieldName = field.getName();
-						value = String.valueOf(map.get(fieldName));
-						if (fieldName.equals("q")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setQ_m(q_m + 1);
-									q_m = q_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setQ_q(q_q + 1);
-									q_q = q_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("tc")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setTc_m(tc_m + 1);
-									tc_m = tc_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setTc_q(tc_q + 1);
-									tc_q = tc_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("oc")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setOc_m(oc_m + 1);
-									oc_m = oc_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setOc_q(oc_q + 1);
-									oc_q = oc_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("ec")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setEc_m(ec_m + 1);
-									ec_m = ec_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setEc_q(ec_q + 1);
-									ec_q = ec_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("na")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setNa_m(na_m + 1);
-									na_m = na_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setNa_q(na_q + 1);
-									na_q = na_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("nh4")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setNh4_m(nh4_m + 1);
-									nh4_m = nh4_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setNh4_q(nh4_q + 1);
-									nh4_q = nh4_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("cl")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setCl_m(cl_m + 1);
-									cl_m = cl_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setCl_q(cl_q + 1);
-									cl_q = cl_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("no3")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setNo3_m(no3_m + 1);
-									no3_m = no3_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setNo3_q(no3_q + 1);
-									no3_q = no3_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("so4")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setSo4_m(so4_m + 1);
-									so4_m = so4_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setSo4_q(so4_q + 1);
-									so4_q = so4_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("al")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setAl_m(al_m + 1);
-									al_m = al_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setAl_q(al_q + 1);
-									al_q = al_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("si")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setSi_m(si_m + 1);
-									si_m = si_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setSi_q(si_q + 1);
-									si_q = si_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("ca")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setCa_m(ca_m + 1);
-									ca_m = ca_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setCa_q(ca_q + 1);
-									ca_q = ca_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("v")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setV_m(v_m + 1);
-									v_m = v_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setV_q(v_q + 1);
-									v_q = v_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("fe")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setFe_m(fe_m + 1);
-									fe_m = fe_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setFe_q(fe_q + 1);
-									fe_q = fe_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("ni")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setNi_m(ni_m + 1);
-									ni_m = ni_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setNi_q(ni_q + 1);
-									ni_q = ni_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("zn")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setZn_m(zn_m + 1);
-									zn_m = zn_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setZn_q(zn_q + 1);
-									zn_q = zn_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("pb")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setPb_m(pb_m + 1);
-									pb_m = pb_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setPb_q(pb_q + 1);
-									pb_q = pb_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("cd")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setCd_m(cd_m + 1);
-									cd_m = cd_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setCd_q(cd_q + 1);
-									cd_q = cd_q + 1;
-								}
-								continue;
-							}
-						} else if (fieldName.equals("s")) {
-							if (StringHelper.isEmpty(value))
-								continue;
-							else {
-								if (value.startsWith("m")) {
-									jwRange.setS_m(s_m + 1);
-									s_m = s_m + 1;
-								} else if (value.startsWith("q")) {
-									jwRange.setS_q(s_q + 1);
-									s_q = s_q + 1;
-								}
-								continue;
-							}
-						}
+					for (Field pscfField : pscfFields) {
+						pscfFieldName = pscfField.getName();
+						if (pscfFieldName.equals("hour") || pscfFieldName.equals("weidu") || pscfFieldName.equals("jingdu"))
+							continue;
+						value = String.valueOf(map.get(pscfFieldName));
+						if (StringHelper.isEmpty(value))
+							continue;
+						pscfFieldName = pscfFieldName.replaceFirst(pscfFieldName.substring(0, 1), pscfFieldName.substring(0, 1).toUpperCase());
+						if (value.startsWith("m")) {
+							Method getMethod = jwRangeClazz.getDeclaredMethod("get" + pscfFieldName + "_m");
+							Integer invoke = Integer.parseInt(getMethod.invoke(jwRange).toString());
+							Method setMethod = jwRangeClazz.getDeclaredMethod("set" + pscfFieldName + "_m", Integer.class);
+							setMethod.invoke(jwRange, invoke + 1);
+						} else if (value.startsWith("q")) {
+							Method getMethod = jwRangeClazz.getDeclaredMethod("get" + pscfFieldName + "_q");
+							Integer invoke = Integer.parseInt(getMethod.invoke(jwRange).toString());
+							Method setMethod = jwRangeClazz.getDeclaredMethod("set" + pscfFieldName + "_q", Integer.class);
+							setMethod.invoke(jwRange, invoke + 1);
+						} else
+							continue;
+						jWRangeDao.save(jwRange);
 					}
-					jWRangeDao.save(jwRange);
 				}
 			}
 		} catch (Exception e) {
@@ -476,7 +215,6 @@ public class JWRangeServiceImpl implements JWRangeService {
 				rowNum++;
 				flag++;
 			}
-
 			FileOutputStream fout = new FileOutputStream(pathname);
 			workbook.write(fout);
 			fout.close();
@@ -490,7 +228,6 @@ public class JWRangeServiceImpl implements JWRangeService {
 
 	}
 
-	@Override
 	public void setValueZero() {
 		List<JWRange> list = findAll();
 		Class<?> clazz = JWRange.class;

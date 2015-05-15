@@ -53,6 +53,7 @@ public class PscfServiceImpl implements PscfService {
 			if (firstRow == null)
 				return;
 			short lastCellNum = firstRow.getLastCellNum();
+			pscfDao.deleteAll();
 			for (int i = firstRowNum + 1; i <= lastRowNum; i++) {
 				list = new ArrayList<Object>();
 				Row row = sheet.getRow(i);
@@ -74,7 +75,6 @@ public class PscfServiceImpl implements PscfService {
 
 	}
 
-	@Override
 	public void saveData(List<Object> data) {
 		Pscf pscf = new Pscf();
 		try {
